@@ -36,4 +36,4 @@
   ..\halinc\stm32f4xx_hal_smartcard.h ..\halinc\stm32f4xx_hal_wwdg.h \
   ..\halinc\stm32f4xx_hal_pcd.h ..\halinc\stm32f4xx_ll_usb.h \
   ..\halinc\stm32f4xx_hal_pcd_ex.h ..\halinc\stm32f4xx_hal_hcd.h \
-  ..\config\stm32f4xx.h ..\config\stm32f4xx_it.h
+  ..\config\stm32f4xx.h ..\config\stm32f4xx_it.h ..\hardware\tim.h

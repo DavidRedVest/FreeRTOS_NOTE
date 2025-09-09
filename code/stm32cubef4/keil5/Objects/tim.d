@@ -1,4 +1,4 @@
-./objects/main.o: ..\user\main.c ..\config\main.h \
+./objects/tim.o: ..\hardware\tim.c ..\hardware\tim.h ..\config\main.h \
   ..\halinc\stm32f4xx_hal.h ..\config\stm32f4xx_hal_conf.h \
   ..\halinc\stm32f4xx_hal_rcc.h ..\halinc\stm32f4xx_hal_def.h \
   ..\config\stm32f4xx.h ..\config\stm32f429xx.h ..\cminc\core_cm4.h \
@@ -36,6 +36,4 @@
   ..\halinc\stm32f4xx_hal_smartcard.h ..\halinc\stm32f4xx_hal_wwdg.h \
   ..\halinc\stm32f4xx_hal_pcd.h ..\halinc\stm32f4xx_ll_usb.h \
   ..\halinc\stm32f4xx_hal_pcd_ex.h ..\halinc\stm32f4xx_hal_hcd.h \
-  ..\config\stm32f4xx.h ..\hardware\led.h ..\hardware\uart.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h ..\hardware\tim.h \
-  ..\hardware\delay.h
+  ..\config\stm32f4xx.h

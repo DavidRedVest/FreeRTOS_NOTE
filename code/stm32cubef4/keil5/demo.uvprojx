@@ -483,6 +483,11 @@
               <FileType>1</FileType>
               <FilePath>..\user\stm32f4xx_it.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_hal_msp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user\stm32f4xx_hal_msp.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -502,6 +507,26 @@
               <FileName>uart.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\hardware\uart.h</FilePath>
+            </File>
+            <File>
+              <FileName>tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\hardware\tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>tim.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\hardware\tim.h</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\hardware\delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\hardware\delay.h</FilePath>
             </File>
           </Files>
         </Group>
