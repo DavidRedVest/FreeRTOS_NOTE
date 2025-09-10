@@ -76,4 +76,26 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     }
 }
 
+/**
+  * @brief  Suspend Tick increment.
+  * @note   Disable the tick increment by disabling TIM7 update interrupt.
+  * @param  None
+  * @retval None
+  */
+void HAL_SuspendTick(void)
+{
+  /* Disable TIM7 update Interrupt */
+  __HAL_TIM_DISABLE_IT(&htim6, TIM_IT_UPDATE);
+}
 
+/**
+  * @brief  Resume Tick increment.
+  * @note   Enable the tick increment by Enabling TIM7 update interrupt.
+  * @param  None
+  * @retval None
+  */
+void HAL_ResumeTick(void)
+{
+  /* Enable TIM7 Update interrupt */
+  __HAL_TIM_ENABLE_IT(&htim6, TIM_IT_UPDATE);
+}

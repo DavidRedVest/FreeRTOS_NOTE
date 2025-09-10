@@ -1,40 +1,76 @@
-./objects/delay.o: ..\hardware\delay.c ..\hardware\delay.h \
-  ..\config\main.h ..\halinc\stm32f4xx_hal.h \
-  ..\config\stm32f4xx_hal_conf.h ..\halinc\stm32f4xx_hal_rcc.h \
-  ..\halinc\stm32f4xx_hal_def.h ..\config\stm32f4xx.h \
-  ..\config\stm32f429xx.h ..\cminc\core_cm4.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
-  ..\cminc\cmsis_version.h ..\cminc\cmsis_compiler.h \
-  ..\cminc\cmsis_armclang.h ..\cminc\mpu_armv7.h \
-  ..\config\system_stm32f4xx.h ..\halinc\Legacy\stm32_hal_legacy.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stddef.h \
-  ..\halinc\stm32f4xx_hal_rcc_ex.h ..\halinc\stm32f4xx_hal_exti.h \
-  ..\halinc\stm32f4xx_hal_gpio.h ..\halinc\stm32f4xx_hal_gpio_ex.h \
-  ..\halinc\stm32f4xx_hal_dma.h ..\halinc\stm32f4xx_hal_dma_ex.h \
-  ..\halinc\stm32f4xx_hal_cortex.h ..\halinc\stm32f4xx_hal_adc.h \
-  ..\halinc\stm32f4xx_ll_adc.h ..\halinc\stm32f4xx_hal_adc_ex.h \
-  ..\halinc\stm32f4xx_hal_can.h ..\halinc\stm32f4xx_hal_crc.h \
-  ..\halinc\stm32f4xx_hal_cryp.h ..\halinc\stm32f4xx_hal_dma2d.h \
-  ..\halinc\stm32f4xx_hal_dac.h ..\halinc\stm32f4xx_hal_dac_ex.h \
-  ..\halinc\stm32f4xx_hal_dcmi.h ..\halinc\stm32f4xx_hal_dcmi_ex.h \
-  ..\halinc\stm32f4xx_hal_eth.h ..\halinc\stm32f4xx_hal_flash.h \
-  ..\halinc\stm32f4xx_hal_flash_ex.h \
-  ..\halinc\stm32f4xx_hal_flash_ramfunc.h ..\halinc\stm32f4xx_hal_sram.h \
-  ..\halinc\stm32f4xx_ll_fmc.h ..\halinc\stm32f4xx_hal_nor.h \
-  ..\halinc\stm32f4xx_hal_nand.h ..\halinc\stm32f4xx_hal_pccard.h \
-  ..\halinc\stm32f4xx_hal_sdram.h ..\halinc\stm32f4xx_hal_hash.h \
-  ..\halinc\stm32f4xx_hal_i2c.h ..\halinc\stm32f4xx_hal_i2c_ex.h \
-  ..\halinc\stm32f4xx_hal_i2s.h ..\halinc\stm32f4xx_hal_i2s_ex.h \
-  ..\halinc\stm32f4xx_hal_iwdg.h ..\halinc\stm32f4xx_hal_ltdc.h \
-  ..\halinc\stm32f4xx_hal_ltdc_ex.h ..\halinc\stm32f4xx_hal_pwr.h \
-  ..\halinc\stm32f4xx_hal_pwr_ex.h ..\halinc\stm32f4xx_hal_rng.h \
-  ..\halinc\stm32f4xx_hal_rtc.h ..\halinc\stm32f4xx_hal_rtc_ex.h \
-  ..\halinc\stm32f4xx_hal_sai.h ..\halinc\stm32f4xx_hal_sai_ex.h \
-  ..\halinc\stm32f4xx_hal_sd.h ..\halinc\stm32f4xx_ll_sdmmc.h \
-  ..\halinc\stm32f4xx_hal_spi.h ..\halinc\stm32f4xx_hal_tim.h \
-  ..\halinc\stm32f4xx_hal_tim_ex.h ..\halinc\stm32f4xx_hal_uart.h \
-  ..\halinc\stm32f4xx_hal_usart.h ..\halinc\stm32f4xx_hal_irda.h \
-  ..\halinc\stm32f4xx_hal_smartcard.h ..\halinc\stm32f4xx_hal_wwdg.h \
-  ..\halinc\stm32f4xx_hal_pcd.h ..\halinc\stm32f4xx_ll_usb.h \
-  ..\halinc\stm32f4xx_hal_pcd_ex.h ..\halinc\stm32f4xx_hal_hcd.h \
-  ..\config\stm32f4xx.h
+.\objects\delay.o: ..\hardware\delay.c
+.\objects\delay.o: ..\hardware\delay.h
+.\objects\delay.o: ..\config\main.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal.h
+.\objects\delay.o: ..\config\stm32f4xx_hal_conf.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_rcc.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_def.h
+.\objects\delay.o: ..\config\stm32f4xx.h
+.\objects\delay.o: ..\config\stm32f429xx.h
+.\objects\delay.o: ..\cminc\core_cm4.h
+.\objects\delay.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\delay.o: ..\cminc\cmsis_version.h
+.\objects\delay.o: ..\cminc\cmsis_compiler.h
+.\objects\delay.o: ..\cminc\cmsis_armcc.h
+.\objects\delay.o: ..\cminc\mpu_armv7.h
+.\objects\delay.o: ..\config\system_stm32f4xx.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal.h
+.\objects\delay.o: ..\halinc\Legacy/stm32_hal_legacy.h
+.\objects\delay.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_rcc_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_exti.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_gpio.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_gpio_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_dma.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_dma_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_cortex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_adc.h
+.\objects\delay.o: ..\halinc\stm32f4xx_ll_adc.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_adc_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_can.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_crc.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_cryp.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_dma2d.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_dac.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_dac_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_dcmi.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_dcmi_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_eth.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_flash.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_flash_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_flash_ramfunc.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_sram.h
+.\objects\delay.o: ..\halinc\stm32f4xx_ll_fmc.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_nor.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_nand.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_pccard.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_sdram.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_hash.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_i2c.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_i2c_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_i2s.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_i2s_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_iwdg.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_ltdc.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_ltdc_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_pwr.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_pwr_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_rng.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_rtc.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_rtc_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_sai.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_sai_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_sd.h
+.\objects\delay.o: ..\halinc\stm32f4xx_ll_sdmmc.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_spi.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_tim.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_tim_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_uart.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_usart.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_irda.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_smartcard.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_wwdg.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_pcd.h
+.\objects\delay.o: ..\halinc\stm32f4xx_ll_usb.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_pcd_ex.h
+.\objects\delay.o: ..\halinc\stm32f4xx_hal_hcd.h

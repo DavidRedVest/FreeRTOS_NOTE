@@ -485,42 +485,19 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 # 移植FreeRTOS 
 
+
+
+
+
 ## TIM6替代滴答时钟 
 
 
 
 在上一个HAL库基础上添加FreeRTOS操作系统，由于FreeRTOS使用了滴答时钟，默认HAL库也使用了滴答时钟，需要将原来HAL库换成定时器方式。
 
-**第一步：**注视掉`HAL_Init()-->>HAL_InitTick(TICK_INT_PRIORITY)-->>HAL_SYSTICK_Config` 配置
 
-在`stm32f4xx_hal.c`文件中的`HAL_InitTick`函数
 
-```C
-__weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
-{
-  /* Configure the SysTick to have interrupt in 1ms time basis*/
-//  if (HAL_SYSTICK_Config(SystemCoreClock / (1000U / uwTickFreq)) > 0U)
-//  {
-//    return HAL_ERROR;
-//  }
-
-  /* Configure the SysTick IRQ priority */
-  if (TickPriority < (1UL << __NVIC_PRIO_BITS))
-  {
-    HAL_NVIC_SetPriority(SysTick_IRQn, TickPriority, 0U);
-    uwTickPrio = TickPriority;
-  }
-  else
-  {
-    return HAL_ERROR;
-  }
-
-  /* Return function status */
-  return HAL_OK;
-}
-```
-
-**第二步：**实现TIM6定时1ms 
+**第一步：**实现TIM6定时1ms 
 
 tim.c文件
 
@@ -628,13 +605,13 @@ void SysTick_Handler(void)
 }
 ```
 
-**第三步：**在main.c中开启定时器TIM6
+**第二步：**在main.c中开启定时器TIM6
 
 ```C
 HAL_TIM_Base_Start_IT(&htim6);
 ```
 
-HAL_Delay函数中，延迟多了1ms，需要修改，创建一个delay.c和delay.h文件
+HAL_Delay函数中，延迟多了1ms，需要修改，创建一个`delay.c`和`delay.h`文件
 
 `delay.c`文件内容：
 
@@ -666,8 +643,6 @@ void HAL_Delay(uint32_t Delay)
 #define __DELAY_H__
 
 #include "main.h"
-
-void HAL_Delay(uint32_t Delay);
 
 
 #endif
@@ -731,7 +706,6 @@ main.c函数测试：
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void Stm32_Clock_Init(uint32_t plln,uint32_t pllm,uint32_t pllp,uint32_t pllq);
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -756,7 +730,6 @@ int main(void)
   /* Configure the System clock to 180 MHz */
   SystemClock_Config();
 
-//	Stm32_Clock_Init(360,25,2,8);
   /* Add your application code here
      */
 
@@ -766,7 +739,7 @@ int main(void)
 	
 	HAL_TIM_Base_Start_IT(&htim6);
 	
-	printf("Hello World111!\r\n");
+	printf("Hello World!\r\n");
   /* Infinite loop */
   while (1)
   {
@@ -780,27 +753,7 @@ int main(void)
   }
 }
 
-/**
-  * @brief  System Clock Configuration
-  *         The system Clock is configured as follow : 
-  *            System Clock source            = PLL (HSE)
-  *            SYSCLK(Hz)                     = 180000000
-  *            HCLK(Hz)                       = 180000000
-  *            AHB Prescaler                  = 1
-  *            APB1 Prescaler                 = 4
-  *            APB2 Prescaler                 = 2
-  *            HSE Frequency(Hz)              = 8000000
-  *            PLL_M                          = 8
-  *            PLL_N                          = 360
-  *            PLL_P                          = 2
-  *            PLL_Q                          = 7
-  *            VDD(V)                         = 3.3
-  *            Main regulator output voltage  = Scale1 mode
-  *            Flash Latency(WS)              = 5
-  * @param  None
-  * @retval None
-  */
-#if 1
+
 void SystemClock_Config(void)
 {
  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -849,55 +802,7 @@ void SystemClock_Config(void)
   }
 }
 
-#else
-void SystemClock_Config(void)
-{
-  RCC_ClkInitTypeDef RCC_ClkInitStruct;
-  RCC_OscInitTypeDef RCC_OscInitStruct;
 
-  /* Enable Power Control clock */
-  __HAL_RCC_PWR_CLK_ENABLE();
-  
-  /* The voltage scaling allows optimizing the power consumption when the device is 
-     clocked below the maximum system frequency, to update the voltage scaling value 
-     regarding system frequency refer to product datasheet.  */
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-  
-  /* Enable HSE Oscillator and activate PLL with HSE as source */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 25;
-  RCC_OscInitStruct.PLL.PLLN = 360;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 8;
-  if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    /* Initialization Error */
-    Error_Handler();
-  }
-  
-  if(HAL_PWREx_EnableOverDrive() != HAL_OK)
-  {
-    /* Initialization Error */
-    Error_Handler();
-  }
-  
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
-     clocks dividers */
-  RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
-  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
-  {
-    /* Initialization Error */
-    Error_Handler();
-  }
-}
-#endif
 /**
   * @brief  This function is executed in case of error occurrence.
   * @param  None
@@ -940,46 +845,336 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 /* USER CODE BEGIN 4 */
-void Stm32_Clock_Init(uint32_t plln,uint32_t pllm,uint32_t pllp,uint32_t pllq)
-{
-    HAL_StatusTypeDef ret = HAL_OK;
-    RCC_OscInitTypeDef RCC_OscInitStructure; 
-    RCC_ClkInitTypeDef RCC_ClkInitStructure;
-    
-    __HAL_RCC_PWR_CLK_ENABLE(); //ʹ��PWRʱ��
-    
-    //������������������õ�ѹ�������ѹ�����Ա�������δ�����Ƶ�ʹ���
-    //ʱʹ�����빦��ʵ��ƽ�⣬�˹���ֻ��STM32F42xx��STM32F43xx�����У�
-    __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);//���õ�ѹ�������ѹ����1
-    
-    RCC_OscInitStructure.OscillatorType=RCC_OSCILLATORTYPE_HSE;    //ʱ��ԴΪHSE
-    RCC_OscInitStructure.HSEState=RCC_HSE_ON;                      //��HSE
-    RCC_OscInitStructure.PLL.PLLState=RCC_PLL_ON;//��PLL
-    RCC_OscInitStructure.PLL.PLLSource=RCC_PLLSOURCE_HSE;//PLLʱ��Դѡ��HSE
-    RCC_OscInitStructure.PLL.PLLM=pllm; //��PLL����ƵPLL��Ƶϵ��(PLL֮ǰ�ķ�Ƶ),ȡֵ��Χ:2~63.
-    RCC_OscInitStructure.PLL.PLLN=plln; //��PLL��Ƶϵ��(PLL��Ƶ),ȡֵ��Χ:64~432.  
-    RCC_OscInitStructure.PLL.PLLP=pllp; //ϵͳʱ�ӵ���PLL��Ƶϵ��(PLL֮��ķ�Ƶ),ȡֵ��Χ:2,4,6,8.(������4��ֵ!)
-    RCC_OscInitStructure.PLL.PLLQ=pllq; //USB/SDIO/������������ȵ���PLL��Ƶϵ��(PLL֮��ķ�Ƶ),ȡֵ��Χ:2~15.
-    ret=HAL_RCC_OscConfig(&RCC_OscInitStructure);//��ʼ��
-	
-    if(ret!=HAL_OK) while(1);
-    
-    ret=HAL_PWREx_EnableOverDrive(); //����Over-Driver����
-    if(ret!=HAL_OK) while(1);
-    
-    //ѡ��PLL��Ϊϵͳʱ��Դ��������HCLK,PCLK1��PCLK2
-    RCC_ClkInitStructure.ClockType=(RCC_CLOCKTYPE_SYSCLK|RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2);
-    RCC_ClkInitStructure.SYSCLKSource=RCC_SYSCLKSOURCE_PLLCLK;//����ϵͳʱ��ʱ��ԴΪPLL
-    RCC_ClkInitStructure.AHBCLKDivider=RCC_SYSCLK_DIV1;//AHB��Ƶϵ��Ϊ1
-    RCC_ClkInitStructure.APB1CLKDivider=RCC_HCLK_DIV4; //APB1��Ƶϵ��Ϊ4
-    RCC_ClkInitStructure.APB2CLKDivider=RCC_HCLK_DIV2; //APB2��Ƶϵ��Ϊ2
-    ret=HAL_RCC_ClockConfig(&RCC_ClkInitStructure,FLASH_LATENCY_5);//ͬʱ����FLASH��ʱ����Ϊ5WS��Ҳ����6��CPU���ڡ�
-		
-    if(ret!=HAL_OK) while(1);
-}
 ```
 
 测试LED闪烁，串口输出正常。
 
 
 
+## 下载FreeRTOS 
+
+官方下载地址：https://www.freertos.org/
+
+![](image/freertos_download_link.jpg) 
+
+![](image/freertos_download_version.jpg) 
+
+目前只有两个版本，下载最新版本 `FreeRTOS 202406.01 LTS` 版本
+
+
+
+## 添加FreeRTOS文件 
+
+找到`FreeRTOSv202406.01-LTS\FreeRTOS-LTS\FreeRTOS\FreeRTOS-Kernel\` 目录
+
+![](image/freertos_kernel_dir.jpg) 
+
+| 文件名          | 描述                                                         |
+| --------------- | ------------------------------------------------------------ |
+| include目录     | 公共头文件目录                                               |
+| portable目录    | 移植层代码，针对不同的CPU架构和编译器，包含上下文切换，启动代码，临界区管理，tick配置 |
+| croutine.c      | 协程支持（co-routines），轻量级的任务机制，不推荐在项目中使用 |
+| event_groups.c  | 事件标志组，允许任务等待多个事件的组合（逻辑与/或）          |
+| list.c          | 内核内部使用的双向链表实现，用于任务就绪链表、延时链表、事件链表等，不直接给应用层用 |
+| queue.c         | 实现队列、信号量（包括二值信号量、计数信号量）、互斥锁、消息队列，是任务之间通信和同步的核心 |
+| stream_buffer.c | 流缓冲区，用于任务或者中断与任务之间传递字节流数据，典型应用场景：UART接收缓冲 |
+| tasks,c         | 核心任务管理模块，包含任务的创建、删除、调度、阻塞、挂起等逻辑，调度器(scheduler)的主要实现就在tasks.c里 |
+| timers.c        | 软件定时器服务，提供独立于硬件定时器的，基于RTOS tick的定时回调机制 |
+
+- include目录所有头文件都需要
+- portable目录下，针对STM32F429IGT6需要MemMang目录和RVDS中的ARM_CM4F目录
+- croutine.c、event_groups.c、list.c、queue.c、stream_buffer.c、tasks,c、timers.c都添加进来
+- 还需要STM32CubeF4库文件中的CMSIS_RTOS_V2目录下的文件，路径 `STM32CubeF4\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2`  
+- 还需要一个配置文件`FreeRTOSConfig.h`，路径`FreeRTOSv202406.01-LTS\FreeRTOS-LTS\FreeRTOS\FreeRTOS-Kernel\examples\template_configuration\FreeRTOSConfig.h` 
+
+
+
+> CMSIS-RTOS_V2 是API的适配层，有ARM CMSIS定义，ST在Cube库里面提供，作用是把FreeRTOS的API映射到CMSIS-RTOS v2的接口，比如 osThreadNew()-->xTaskCreate()，osSemaphoreAcquire()-->xSemaphoreTake() 等
+
+添加之后的文件目录：
+
+![](image/freertos_add_file_dir.jpg) 
+
+开始添加文件
+
+![](image/freertos_add_file_show.jpg) 
+
+![](image/freertos_add_header_path.jpg) 
+
+
+
+## 新版编译错误 
+
+需要使用`ARM Compiler 5`版本，不然编译会报大量不兼容的错误，目前`FreeRTOS` 不支持`ARM Compiler 6`。
+
+![](image/freertos_compler_version.jpg) 
+
+
+
+### 修改FreeRTOSConfig.h
+
+```C
+//一般这类32位MCU都用32bit，不要用16bit，容易溢出
+#define configTICK_TYPE_WIDTH_IN_BITS              TICK_TYPE_WIDTH_32_BITS
+
+/*-----------------------------------------------------------
+ * CPU & Tick settings
+ *----------------------------------------------------------*/
+#define configCPU_CLOCK_HZ                     (SystemCoreClock)
+#define configTICK_RATE_HZ                     ((TickType_t)1000)
+#define configUSE_16_BIT_TICKS                 0
+#define configTICK_TYPE_WIDTH_IN_BITS          TICK_TYPE_WIDTH_32_BITS
+
+/* Task priorities */
+#define configMAX_PRIORITIES                   56   /* CMSIS-RTOS2 Thread API 必须 = 56 */
+#define configMINIMAL_STACK_SIZE               ((uint16_t)128)
+#define configTOTAL_HEAP_SIZE                  ((size_t)(20 * 1024))
+
+/* Cortex-M specific */
+#define configPRIO_BITS                        4   /* STM32F429 默认 4 位 */
+#define configKERNEL_INTERRUPT_PRIORITY        (255)
+#define configMAX_SYSCALL_INTERRUPT_PRIORITY   (5 << (8 - configPRIO_BITS))
+
+/*-----------------------------------------------------------
+ * Optional FreeRTOS API
+ *----------------------------------------------------------*/
+/* Semaphore / Mutex */
+#define INCLUDE_vSemaphoreDelete               1
+#define INCLUDE_vSemaphoreCreateBinary         1
+#define INCLUDE_xSemaphoreGetMutexHolder       1
+
+/* Thread / Task */
+#define INCLUDE_vTaskPrioritySet               1
+#define INCLUDE_vTaskDelay                     1
+#define INCLUDE_vTaskDelete                    1
+#define INCLUDE_vTaskSuspend                   1
+#define INCLUDE_uxTaskGetStackHighWaterMark   1
+#define INCLUDE_eTaskGetState                  1
+
+/* Timer / Event API */
+#define INCLUDE_vTaskDelayUntil                1
+#define INCLUDE_xTimerPendFunctionCall         1
+
+/* Trace / Debug */
+#define configUSE_TRACE_FACILITY               1
+```
+
+
+
+### port.c(核心文件包含) 
+
+```C
+#include <stdint.h>
+#include "stm32f4xx.h"
+```
+
+### CMSIS-RTOS2 SysTick 处理 
+
+将`cmsis_os2.c` 文件中`SysTick_Handler`保留，FreeRTOS会用，删除 `stm32f4xx_it.c` 文件中的`SysTick_Handler` 
+
+
+
+### FreeRTOSConfig.h 中的宏重定向 
+
+将 `stm32f4xx_it.c` 文件中的`SVC_Handler` 和 `PendSV_Handler` 函数注释掉，在`FreeRTOSConfig.h`重新定向：
+
+```C
+//FreeRTOSConfig.h
+#define vPortSVCHandler    SVC_Handler
+#define xPortPendSVHandler PendSV_Handler
+```
+
+### CMSIS-RTOS2 钩子函数签名 
+
+将 cmsis_os2.c 文件中的 vApplicationStackOverflowHook 函数参数由原来的 `void vApplicationStackOverflowHook(TaskHandle_t xTask, signed char *pcTaskName)` 改为 `void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName)` ，即`signed char` 改为 `char` ，参数类型必须与 `task.h` 完全一致
+
+```C
+void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName)
+{
+    (void)xTask;
+    (void)pcTaskName;
+    while(1);
+}
+
+void vApplicationMallocFailedHook(void)
+{
+    while(1);
+}
+```
+
+### freertos_os2.h 宏定义 
+
+添加`CMSIS_device_header` 宏定义
+
+```C
+#ifndef CMSIS_device_header
+#define CMSIS_device_header "stm32f4xx.h"  // STM32F429 对应头文件
+#endif
+
+#include CMSIS_device_header
+```
+
+
+
+### error: unknown type name '__forceinline' 
+
+🔎 背景
+
+- __forceinline 不是 C 标准关键字，而是 某些编译器特定的内联修饰符。
+- 在 FreeRTOS 新版（尤其是 LTS 内核）里，引入了一个宏 FORCE_INLINE，内部可能定义成了 __forceinline。
+- 但是 Keil ARMCC/ARMCLANG 编译器 不支持 __forceinline。
+
+✅ 解决办法
+
+使用 ARM Compiler 5版本编译，否则会报错
+
+
+
+## 增加freertos.c文件 
+
+在 main.c中添加FreeRTOS 代码：
+
+```C
+int main(void)
+{
+
+  /* STM32F4xx HAL library initialization:
+       - Configure the Flash prefetch, Flash preread and Buffer caches
+       - Systick timer is configured by default as source of time base, but user 
+             can eventually implement his proper time base source (a general purpose 
+             timer for example or other time source), keeping in mind that Time base 
+             duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
+             handled in milliseconds basis.
+       - Low Level Initialization
+     */
+  HAL_Init();
+
+  /* Configure the System clock to 180 MHz */
+  SystemClock_Config();
+
+  /* Add your application code here
+     */
+
+	LED_Init();
+	uart_init(115200);
+	tim6_init();
+	
+	HAL_TIM_Base_Start_IT(&htim6);
+	
+	printf("Hello World!\r\n");
+	
+/* Init scheduler */
+  osKernelInitialize();
+
+  /* Call init function for freertos objects (in cmsis_os2.c) */
+  MX_FREERTOS_Init();
+
+  /* Start scheduler */
+  osKernelStart();	
+	
+  /* Infinite loop */
+  while (1)
+  {
+      	//不会执行到此处
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_1,GPIO_PIN_RESET); 
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET);   
+		HAL_Delay(500);										
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_1,GPIO_PIN_SET);   
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET); 
+		HAL_Delay(500);
+	  
+  }
+}
+```
+
+freertos.c文件内容：
+
+```C
+/* Includes ------------------------------------------------------------------*/
+#include "FreeRTOS.h"
+#include "task.h"
+#include "main.h"
+#include "cmsis_os.h"
+
+#include <stdio.h>
+
+void MX_FREERTOS_Init(void); 
+void StartDefaultTask(void *argument);
+
+osThreadId_t defaultTaskHandle;
+const osThreadAttr_t defaultTask_attributes = {
+  .name = "defaultTask",
+  .stack_size = 128,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
+void MX_FREERTOS_Init(void) {
+	defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+	if (defaultTaskHandle == NULL) {
+		printf("osThreadNew error!\r\n");
+	}
+}
+
+
+/* USER CODE BEGIN Header_StartDefaultTask */
+/**
+  * @brief  Function implementing the defaultTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+void StartDefaultTask(void *argument)
+{
+  /* USER CODE BEGIN StartDefaultTask */
+  /* Infinite loop */
+  for(;;)
+  {	  
+	  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
+	  HAL_Delay(500);
+	  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET);
+	  HAL_Delay(500);
+  }
+  /* USER CODE END StartDefaultTask */
+}
+```
+
+程序正常运行，LED闪烁，至此，手动添加HAL库文件，手动添加FreeRTOS文件已经全部完成！
+
+# 总结 
+
+- SVC_Handler
+
+  Cortex-M系列有一个指令SVC，用户请求特权模式，FreeRTOS使用SVC来启动调度器
+
+  ```C
+  SVC #0
+  ```
+
+  vPortSVCHandler 会被调用，功能：
+
+  1.保存当前上下文（寄存器）
+
+  2.切换到第一个任务的栈
+
+  3.恢复第一个任务的上下文
+
+- PendSV_Handler
+
+  PendSV是延迟可挂起的系统调用中断，FreeRTOS使用它来执行上下文切换，当任务满足切换条件时：
+
+  1.设置PendSV pending位
+
+  2.CPU异步进入PendSV_Handler
+
+  3.保存当前任务上下文
+
+  4.切换到下一个任务的上下文
+
+- SysTick_Handler（系统滴答） 
+
+  Cortex-M4的sysTick是一个周期性定时器中断，FreeRTOS用它来触发tick:
+
+  1.增加系统tick计数
+
+  2.检查是否需要切换任务-->设置PendSV
+
+SVC_Handler只会执行一次，PendSV和SysTick才是调度器运行的核心循环。

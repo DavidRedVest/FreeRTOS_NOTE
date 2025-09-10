@@ -1,41 +1,91 @@
-./objects/main.o: ..\user\main.c ..\config\main.h \
-  ..\halinc\stm32f4xx_hal.h ..\config\stm32f4xx_hal_conf.h \
-  ..\halinc\stm32f4xx_hal_rcc.h ..\halinc\stm32f4xx_hal_def.h \
-  ..\config\stm32f4xx.h ..\config\stm32f429xx.h ..\cminc\core_cm4.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
-  ..\cminc\cmsis_version.h ..\cminc\cmsis_compiler.h \
-  ..\cminc\cmsis_armclang.h ..\cminc\mpu_armv7.h \
-  ..\config\system_stm32f4xx.h ..\halinc\Legacy\stm32_hal_legacy.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stddef.h \
-  ..\halinc\stm32f4xx_hal_rcc_ex.h ..\halinc\stm32f4xx_hal_exti.h \
-  ..\halinc\stm32f4xx_hal_gpio.h ..\halinc\stm32f4xx_hal_gpio_ex.h \
-  ..\halinc\stm32f4xx_hal_dma.h ..\halinc\stm32f4xx_hal_dma_ex.h \
-  ..\halinc\stm32f4xx_hal_cortex.h ..\halinc\stm32f4xx_hal_adc.h \
-  ..\halinc\stm32f4xx_ll_adc.h ..\halinc\stm32f4xx_hal_adc_ex.h \
-  ..\halinc\stm32f4xx_hal_can.h ..\halinc\stm32f4xx_hal_crc.h \
-  ..\halinc\stm32f4xx_hal_cryp.h ..\halinc\stm32f4xx_hal_dma2d.h \
-  ..\halinc\stm32f4xx_hal_dac.h ..\halinc\stm32f4xx_hal_dac_ex.h \
-  ..\halinc\stm32f4xx_hal_dcmi.h ..\halinc\stm32f4xx_hal_dcmi_ex.h \
-  ..\halinc\stm32f4xx_hal_eth.h ..\halinc\stm32f4xx_hal_flash.h \
-  ..\halinc\stm32f4xx_hal_flash_ex.h \
-  ..\halinc\stm32f4xx_hal_flash_ramfunc.h ..\halinc\stm32f4xx_hal_sram.h \
-  ..\halinc\stm32f4xx_ll_fmc.h ..\halinc\stm32f4xx_hal_nor.h \
-  ..\halinc\stm32f4xx_hal_nand.h ..\halinc\stm32f4xx_hal_pccard.h \
-  ..\halinc\stm32f4xx_hal_sdram.h ..\halinc\stm32f4xx_hal_hash.h \
-  ..\halinc\stm32f4xx_hal_i2c.h ..\halinc\stm32f4xx_hal_i2c_ex.h \
-  ..\halinc\stm32f4xx_hal_i2s.h ..\halinc\stm32f4xx_hal_i2s_ex.h \
-  ..\halinc\stm32f4xx_hal_iwdg.h ..\halinc\stm32f4xx_hal_ltdc.h \
-  ..\halinc\stm32f4xx_hal_ltdc_ex.h ..\halinc\stm32f4xx_hal_pwr.h \
-  ..\halinc\stm32f4xx_hal_pwr_ex.h ..\halinc\stm32f4xx_hal_rng.h \
-  ..\halinc\stm32f4xx_hal_rtc.h ..\halinc\stm32f4xx_hal_rtc_ex.h \
-  ..\halinc\stm32f4xx_hal_sai.h ..\halinc\stm32f4xx_hal_sai_ex.h \
-  ..\halinc\stm32f4xx_hal_sd.h ..\halinc\stm32f4xx_ll_sdmmc.h \
-  ..\halinc\stm32f4xx_hal_spi.h ..\halinc\stm32f4xx_hal_tim.h \
-  ..\halinc\stm32f4xx_hal_tim_ex.h ..\halinc\stm32f4xx_hal_uart.h \
-  ..\halinc\stm32f4xx_hal_usart.h ..\halinc\stm32f4xx_hal_irda.h \
-  ..\halinc\stm32f4xx_hal_smartcard.h ..\halinc\stm32f4xx_hal_wwdg.h \
-  ..\halinc\stm32f4xx_hal_pcd.h ..\halinc\stm32f4xx_ll_usb.h \
-  ..\halinc\stm32f4xx_hal_pcd_ex.h ..\halinc\stm32f4xx_hal_hcd.h \
-  ..\config\stm32f4xx.h ..\hardware\led.h ..\hardware\uart.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h ..\hardware\tim.h \
-  ..\hardware\delay.h
+.\objects\main.o: ..\user\main.c
+.\objects\main.o: ..\config\main.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal.h
+.\objects\main.o: ..\config\stm32f4xx_hal_conf.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_rcc.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_def.h
+.\objects\main.o: ..\config\stm32f4xx.h
+.\objects\main.o: ..\config\stm32f429xx.h
+.\objects\main.o: ..\cminc\core_cm4.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\main.o: ..\cminc\cmsis_version.h
+.\objects\main.o: ..\cminc\cmsis_compiler.h
+.\objects\main.o: ..\cminc\cmsis_armcc.h
+.\objects\main.o: ..\cminc\mpu_armv7.h
+.\objects\main.o: ..\config\system_stm32f4xx.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal.h
+.\objects\main.o: ..\halinc\Legacy/stm32_hal_legacy.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_rcc_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_exti.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_gpio.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_gpio_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_dma.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_dma_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_cortex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_adc.h
+.\objects\main.o: ..\halinc\stm32f4xx_ll_adc.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_adc_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_can.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_crc.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_cryp.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_dma2d.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_dac.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_dac_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_dcmi.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_dcmi_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_eth.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_flash.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_flash_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_flash_ramfunc.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_sram.h
+.\objects\main.o: ..\halinc\stm32f4xx_ll_fmc.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_nor.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_nand.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_pccard.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_sdram.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_hash.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_i2c.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_i2c_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_i2s.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_i2s_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_iwdg.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_ltdc.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_ltdc_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_pwr.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_pwr_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_rng.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_rtc.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_rtc_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_sai.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_sai_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_sd.h
+.\objects\main.o: ..\halinc\stm32f4xx_ll_sdmmc.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_spi.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_tim.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_tim_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_uart.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_usart.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_irda.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_smartcard.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_wwdg.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_pcd.h
+.\objects\main.o: ..\halinc\stm32f4xx_ll_usb.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_pcd_ex.h
+.\objects\main.o: ..\halinc\stm32f4xx_hal_hcd.h
+.\objects\main.o: ..\hardware\led.h
+.\objects\main.o: ..\hardware\uart.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: ..\hardware\tim.h
+.\objects\main.o: ..\hardware\delay.h
+.\objects\main.o: ..\..\middlewares\freertos\CMSIS_RTOS_V2\cmsis_os.h
+.\objects\main.o: ..\..\middlewares\freertos\include\FreeRTOS.h
+.\objects\main.o: ..\..\middlewares\freertos\FreeRTOSConfig.h
+.\objects\main.o: ..\..\middlewares\freertos\include\projdefs.h
+.\objects\main.o: ..\..\middlewares\freertos\include\portable.h
+.\objects\main.o: ..\..\middlewares\freertos\include\deprecated_definitions.h
+.\objects\main.o: ..\..\middlewares\freertos\portable\portable\RVDS\ARM_CM4F\portmacro.h
+.\objects\main.o: ..\..\middlewares\freertos\include\mpu_wrappers.h
+.\objects\main.o: ..\..\middlewares\freertos\include\task.h
+.\objects\main.o: ..\..\middlewares\freertos\include\list.h
+.\objects\main.o: ..\..\middlewares\freertos\CMSIS_RTOS_V2\cmsis_os2.h

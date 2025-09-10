@@ -11,7 +11,7 @@ void HAL_MspInit(void)
   __HAL_RCC_PWR_CLK_ENABLE();
 
   /* System interrupt init*/
-
+	HAL_NVIC_SetPriority(PendSV_IRQn, 15, 0);
   /* USER CODE BEGIN MspInit 1 */
 
   /* USER CODE END MspInit 1 */
